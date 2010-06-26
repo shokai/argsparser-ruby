@@ -1,34 +1,30 @@
 = ArgsParser
 
-* http://bitbucket.org/shokai/argsparser-ruby
+* http://github.com/shokai/argsparser-ruby
 
 == DESCRIPTION:
 
 * Parse args from command line.
 
-== FEATURES/PROBLEMS:
-
-
-
 == SYNOPSIS:
 
-parser = ArgsParser.parser
-parser.bind(:help, :h, "show help")
-parser.bind(:size, :s, "size")
-parser.comment(:min, "min size")
-parser.comment(:max, "max size")
-parser.comment(:debug, "debug mode")
-
-params = parser.parse(ARGV)
-
-if parser.has_option(:help) or !parser.has_params([:size, :max, :min])
-   puts parser.help
-   puts 'e.g.  ./example.rb -s 320x240 -min 100 -max 500'
-end
-
-puts params[:size]
-
-p params
+    parser = ArgsParser.parser
+    parser.bind(:help, :h, "show help")
+    parser.bind(:size, :s, "size")
+    parser.comment(:min, "min size")
+    parser.comment(:max, "max size")
+    parser.comment(:debug, "debug mode")
+    
+    params = parser.parse(ARGV)
+    
+    if parser.has_option(:help) or !parser.has_params([:size, :max, :min])
+       puts parser.help
+       puts 'e.g.  ./example.rb -s 320x240 -min 100 -max 500'
+    end
+    
+    puts params[:size]
+    
+    p params
 
 
 == INSTALL:
