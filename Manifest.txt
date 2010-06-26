@@ -1,0 +1,16 @@
+History.txt
+Manifest.txt
+README.rdoc
+Rakefile
+lib/ArgsParser.rb
+lib/ArgsParser/Parser.rb
+examples/example.rb
+examples/math.rb
+examples/sum.rb
+script/console
+script/destroy
+script/generate
+tasks/rspec.rake
+spec/parser_spec.rb
+spec/spec.opts
+spec/spec_helper.rb

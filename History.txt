@@ -1,0 +1,16 @@
+=== 0.0.8 2010-06-26
+
+* fix my name
+
+=== 0.0.6 2010-03-15
+
+* add examples
+
+=== 0.0.5 2010-03-15
+
+* parse first arg
+
+=== 0.0.1 2010-02-23
+
+* 1 major enhancement:
+  * Initial release
