@@ -6,7 +6,7 @@ directory = File.expand_path(File.dirname(__FILE__))
 require File.join(directory, 'ArgsParser', 'Parser')
 
 module ArgsParser
-  VERSION = '0.0.8'
+  VERSION = '0.0.9'
 
   def ArgsParser.parser
     Parser.new
