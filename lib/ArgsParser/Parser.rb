@@ -74,26 +74,31 @@ class Parser
   end
   
   def help
-    binds_reversed = Hash.new
-    most_longname_size = 0
-    @binds.keys.each{|key|
-      value = @binds[key]
-      binds_reversed[value] = key
-      if most_longname_size < len = key.to_s.size + value.to_s.size
-        most_longname_size = len
-      end
+    lines = Hash.new
+    @comments.each{|k,v|
+      lines[k] = {:comment => v}
     }
 
-    s = "options:\n"
-    @comments.keys.sort{|a,b| a.to_s <=> b.to_s }.each{|name|
-      comment = @comments[name]
-      if shortname = binds_reversed[name]
-        s += " -#{name} (-#{shortname})" +
-          " "*(most_longname_size-name.to_s.size-shortname.to_s.size+2) + "#{comment}\n"
-      else
-        s += " -#{name}" + " "*(most_longname_size-name.to_s.size+6) + "#{comment}\n"
-      end
+    @binds.each{|k,v|
+      lines[v][:binds] = k
     }
+    
+    most_long = 0
+    lines.each{|k,v|
+      name = " -#{k}"
+      name += " (-#{v[:binds]})" if v[:binds]
+      most_long = name.size if most_long < name.size
+    }
+    
+    s = ""
+    lines.each{|k,v|
+      name = " -#{k}"
+      name += " (-#{v[:binds]})" if v[:binds]
+      line = name.ljust(most_long+2)
+      line += v[:comment]
+      s += line+"\n"
+    }
+    s = "options:\n" + s
     return s
   end
 
