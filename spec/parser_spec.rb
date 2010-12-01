@@ -22,10 +22,15 @@ describe "test of parsing params" do
              '-yscale', '240',
              '-debug']
     @parser = ArgsParser.parser
-    @parser.comment(:debug, "debug mode")
-    @parser.bind(:xscale, :x, "width")
-    @parser.bind(:yscale, :y, "height")
+    @parser.comment(:debug, 'debug mode')
+    @parser.bind(:xscale, :x, 'width')
+    @parser.bind(:yscale, :y, 'height')
+    @parser.comment(:test_for_error_cauased_by_long_argument, 'long arguent')
     @first, @params = @parser.parse(@argv)
+  end
+
+  it 'should return help as string' do
+    @parser.help.class.should == String
   end
 
   it "has not first-arg" do
