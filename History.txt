@@ -1,3 +1,7 @@
+=== 1.0.0 2011-06-22
+
+* default value
+
 === 0.0.10 2010-12-1
 
 * fix help string of long argument

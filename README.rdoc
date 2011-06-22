@@ -10,16 +10,16 @@
 
     parser = ArgsParser.parser
     parser.bind(:help, :h, "show help")
-    parser.bind(:size, :s, "size")
+    parser.bind(:size, :s, "size", "320x240") # name, shortname, comment, default
     parser.comment(:min, "min size")
     parser.comment(:max, "max size")
-    parser.comment(:debug, "debug mode")
+    parser.comment(:debug, "debug mode", false) # name, comment, default
     
     params = parser.parse(ARGV)
     
     if parser.has_option(:help) or !parser.has_params([:size, :max, :min])
        puts parser.help
-       puts 'e.g.  ./example.rb -s 320x240 -min 100 -max 500'
+       puts 'e.g.   ruby example.rb -s 320x240 -min 100 -max 500'
     end
     
     puts params[:size]

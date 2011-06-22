@@ -3,12 +3,12 @@
 
 module ArgsParser
   class Parser
-
     attr_reader :params, :comments, :first
 
     def initialize
       @binds = Hash.new
       @comments = Hash.new
+      @defaults = Hash.new
     end
 
     def parse(argv)
@@ -37,15 +37,24 @@ module ArgsParser
           @params.delete(name)
         end
       }
+
+      @defaults.each{|k,v|
+        if @params[k] == nil
+          @params[k] = v
+        end
+      }
       
       return @first, @params
     end
 
-    def bind(fullname, name, comment=nil)
+    def bind(fullname, name, comment, default=nil)
       @binds[name.to_sym] = fullname.to_sym
-      if comment != nil
-        comment(fullname, comment)
-      end
+      comment(fullname, comment, default)
+    end
+
+    def comment(name, comment, default=nil)
+      @comments[name.to_sym] = comment.to_s
+      @defaults[name.to_sym] = default if default != nil
     end
 
     def has_param(name)
@@ -69,10 +78,6 @@ module ArgsParser
       }
       return true
     end
-
-    def comment(name, comment)
-      @comments[name.to_sym] = comment.to_s
-    end
     
     def help
       lines = Hash.new
@@ -82,6 +87,10 @@ module ArgsParser
 
       @binds.each{|k,v|
         lines[v][:binds] = k
+      }
+
+      @defaults.each{|k,v|
+        lines[k][:default] = v
       }
       
       most_long = 0
@@ -97,6 +106,7 @@ module ArgsParser
         name += " (-#{v[:binds]})" if v[:binds]
         line = name.ljust(most_long+2)
         line += v[:comment]
+        line += " : default => " + v[:default].to_s if v[:default] != nil
         s += line+"\n"
       }
       s = "options:\n" + s
