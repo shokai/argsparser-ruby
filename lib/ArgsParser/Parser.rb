@@ -106,7 +106,7 @@ module ArgsParser
         name += " (-#{v[:binds]})" if v[:binds]
         line = name.ljust(most_long+2)
         line += v[:comment]
-        line += " : default => " + v[:default].to_s if v[:default] != nil
+        line += " : default - " + v[:default].to_s if v[:default] != nil
         s += line+"\n"
       }
       s = "options:\n" + s
