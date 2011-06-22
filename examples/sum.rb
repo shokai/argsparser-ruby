@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-require '../lib/ArgsParser'
+require 'rubygems'
+require 'ArgsParser'
+require File.dirname(__FILE__)+'/../lib/ArgsParser'
 
 parser = ArgsParser.parser
 parser.bind(:help, :h, "show help")
